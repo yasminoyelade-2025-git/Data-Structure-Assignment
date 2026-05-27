@@ -1,0 +1,5 @@
+13,NJ,hy,kpop
+14,DS,TYS,COM
+15,CSA,TYS,COM
+16,Aljabar,zac,Math
+12,Babymon,sm,kpop

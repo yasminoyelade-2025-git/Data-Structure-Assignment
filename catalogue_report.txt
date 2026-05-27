@@ -1,0 +1,45 @@
+ISBN       : 12
+Title      : Babymon
+Author     : sm
+Category   : kpop
+Status     : Available
+Borrowed   : 0 times
+BorrowDate : -
+DueDate    : -
+----------------------------------
+ISBN       : 13
+Title      : NJ
+Author     : hy
+Category   : kpop
+Status     : Available
+Borrowed   : 0 times
+BorrowDate : -
+DueDate    : -
+----------------------------------
+ISBN       : 14
+Title      : DS
+Author     : TYS
+Category   : COM
+Status     : Available
+Borrowed   : 0 times
+BorrowDate : -
+DueDate    : -
+----------------------------------
+ISBN       : 15
+Title      : CSA
+Author     : TYS
+Category   : COM
+Status     : Available
+Borrowed   : 0 times
+BorrowDate : -
+DueDate    : -
+----------------------------------
+ISBN       : 16
+Title      : Aljabar
+Author     : zac
+Category   : Math
+Status     : Available
+Borrowed   : 0 times
+BorrowDate : -
+DueDate    : -
+----------------------------------

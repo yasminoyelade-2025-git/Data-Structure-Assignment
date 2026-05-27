@@ -1,15 +1,25 @@
-interface LibraryADT {
-    
-    //adding book by ISBN code, book title and name of author
-    void addBook(int isbnCode, String bookTitle, String authorName);
-    
-    //search book by ISBN code
+public interface LibraryADT {
+
+    void addBook(int isbnCode,
+                 String title,
+                 String author,
+                 String category);
+
     void searchBook(int isbnCode);
-    
-    //recording movement of book
+
+    void searchBookByTitle(String keyword);
+
     void borrowBook(int isbnCode);
-    
-    //display recently viewed book
+
+    void returnLatestBook();
+
+    void deleteBook(int isbnCode);
+
     void viewBorrowingHistory();
-    
+
+    void displayAllBooks();
+
+    void showMostBorrowedBook();
+
+    void exportCatalogue();
 }

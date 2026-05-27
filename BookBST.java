@@ -2,74 +2,75 @@ public class BookBST {
 
     private Book root;
 
-    // constructor
     public BookBST() {
         root = null;
     }
 
-    // insert book into BST
-    public void insert(int isbnCode,
-                       String bookTitle,
-                       String authorName) {
+    public Book getRoot() {
+        return root;
+    }
+
+    public boolean insert(int isbnCode,
+                          String title,
+                          String author,
+                          String category) {
+
+        if (searchDuplicate(root, isbnCode)) {
+
+            System.out.println("Duplicate ISBN is not allowed.");
+
+            return false;
+        }
 
         root = insertRecursive(
                 root,
                 isbnCode,
-                bookTitle,
-                authorName
+                title,
+                author,
+                category
         );
+
+        return true;
     }
 
-    // recursive insert
     private Book insertRecursive(Book current,
                                  int isbnCode,
-                                 String bookTitle,
-                                 String authorName) {
+                                 String title,
+                                 String author,
+                                 String category) {
 
-        // create new node if empty
         if (current == null) {
-
-            System.out.println("Book inserted successfully.");
 
             return new Book(
                     isbnCode,
-                    bookTitle,
-                    authorName
+                    title,
+                    author,
+                    category
             );
         }
 
-        // prevent duplicate ISBN
-        if (isbnCode == current.getIsbnCode()) {
-
-            System.out.println("Duplicate ISBN not allowed.");
-
-            return current;
-        }
-
-        // smaller ISBN goes left
         if (isbnCode < current.getIsbnCode()) {
 
             current.setLeft(
-
                     insertRecursive(
                             current.getLeft(),
                             isbnCode,
-                            bookTitle,
-                            authorName
+                            title,
+                            author,
+                            category
                     )
             );
         }
 
-        // larger ISBN goes right
         else {
 
             current.setRight(
-
                     insertRecursive(
                             current.getRight(),
                             isbnCode,
-                            bookTitle,
-                            authorName
+                            title,
+                            author,
+                            category
                     )
             );
         }
@@ -77,36 +78,126 @@ public class BookBST {
         return current;
     }
 
-    // display all books in sorted order
+    private boolean searchDuplicate(Book current,
+                                    int isbnCode) {
+
+        if (current == null) {
+            return false;
+        }
+
+        if (isbnCode == current.getIsbnCode()) {
+            return true;
+        }
+
+        if (isbnCode < current.getIsbnCode()) {
+
+            return searchDuplicate(
+                    current.getLeft(),
+                    isbnCode
+            );
+        }
+
+        return searchDuplicate(
+                current.getRight(),
+                isbnCode
+        );
+    }
+
+    public Book delete(Book current,
+                       int isbnCode) {
+
+        if (current == null) {
+            return null;
+        }
+
+        if (isbnCode < current.getIsbnCode()) {
+
+            current.setLeft(
+                    delete(
+                            current.getLeft(),
+                            isbnCode
+                    )
+            );
+        }
+
+        else if (isbnCode > current.getIsbnCode()) {
+
+            current.setRight(
+                    delete(
+                            current.getRight(),
+                            isbnCode
+                    )
+            );
+        }
+
+        else {
+
+            if (current.getLeft() == null) {
+                return current.getRight();
+            }
+
+            if (current.getRight() == null) {
+                return current.getLeft();
+            }
+
+            Book smallest = findSmallest(current.getRight());
+
+            current = smallest;
+
+            current.setRight(
+                    delete(
+                            current.getRight(),
+                            smallest.getIsbnCode()
+                    )
+            );
+        }
+
+        return current;
+    }
+
+    private Book findSmallest(Book current) {
+
+        while (current.getLeft() != null) {
+            current = current.getLeft();
+        }
+
+        return current;
+    }
+
+    public void deleteBook(int isbnCode) {
+
+        root = delete(root, isbnCode);
+    }
+
     public void displayBooks() {
 
         if (root == null) {
 
-            System.out.println("Library is empty.");
+            System.out.println("Library catalogue is empty.");
 
             return;
         }
 
-        System.out.println("\n=== BOOK LIST ===");
+        System.out.println(
+                "\n========== BOOK CATALOGUE =========="
+        );
 
-        inorderRecursive(root);
+        inorderTraversal(root);
     }
 
-    // inorder traversal
-    private void inorderRecursive(Book current) {
+    private void inorderTraversal(Book current) {
 
         if (current != null) {
 
-            inorderRecursive(current.getLeft());
+            inorderTraversal(current.getLeft());
 
             System.out.println(current);
 
-            inorderRecursive(current.getRight());
-        }
-    }
+            System.out.println(
+                    "-----------------------------------"
+            );
 
-    // return root node
-    public Book getRoot() {
-        return root;
+            inorderTraversal(current.getRight());
+        }
     }
 }
